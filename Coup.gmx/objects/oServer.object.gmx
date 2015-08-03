@@ -26,11 +26,6 @@
           <argument>
             <kind>1</kind>
             <string>// --- Code to create deck ------------------------
-
-// This creates a data type called List. It's pretty much a linked list.
-// Note that there is no "var" or other type identifier in front of Deck. This
-// makes the variable Deck an instance-variable -- Meaning it can be used outside of
-// this code section, but only by the instance (in this case, oServer).
 Deck = ds_list_create();
 
 // Here we add all the cards: Ambassadors, Assassins, Captaisn, Contessas, and Dukes.
@@ -44,6 +39,9 @@ randomize();
 // Here we actually shuffle the Deck.
 ds_list_shuffle(Deck);
 
+
+
+// -- FOR TESTING -------------------------------------
 for (var i = 0; i &lt; 15; i++){
     show_debug_message(ds_list_find_value(Deck, i));
 }

@@ -21,7 +21,7 @@
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\scr_Setup.gml</script>
-    <script>scripts\scr_SendCard.gml</script>
+    <script>scripts\scr_DoAction.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\oPlayer</object>
