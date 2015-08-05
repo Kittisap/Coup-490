@@ -6,21 +6,28 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
-    <sprite>sprites\sprCon</sprite>
-    <sprite>sprites\sprConButton</sprite>
-    <sprite>sprites\sprAssButton</sprite>
-    <sprite>sprites\sprDukButton</sprite>
-    <sprite>sprites\sprCapButton</sprite>
-    <sprite>sprites\sprAmbButton</sprite>
-    <sprite>sprites\sprAss</sprite>
-    <sprite>sprites\sprUnknown</sprite>
+    <sprites name="Influences">
+      <sprite>sprites\sprAss</sprite>
+      <sprite>sprites\sprCon</sprite>
+      <sprite>sprites\sprUnknown</sprite>
+    </sprites>
+    <sprites name="Action Buttons">
+      <sprite>sprites\sprAssButton</sprite>
+      <sprite>sprites\sprAmbButton</sprite>
+      <sprite>sprites\sprForButton</sprite>
+      <sprite>sprites\sprCapButton</sprite>
+      <sprite>sprites\sprIncButton</sprite>
+      <sprite>sprites\sprCoupButton</sprite>
+      <sprite>sprites\sprConButton</sprite>
+      <sprite>sprites\sprDukButton</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
-    <script>scripts\scr_Setup.gml</script>
+    <script>scripts\scr_SendAction.gml</script>
     <script>scripts\scr_DoAction.gml</script>
   </scripts>
   <objects name="objects">
@@ -38,6 +45,9 @@
       <object>objects\DukButton</object>
       <object>objects\CapButton</object>
       <object>objects\ConButton</object>
+      <object>objects\IncButton</object>
+      <object>objects\ForButton</object>
+      <object>objects\CouButton</object>
     </objects>
   </objects>
   <rooms name="rooms">
