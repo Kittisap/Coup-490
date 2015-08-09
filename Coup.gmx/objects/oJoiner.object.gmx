@@ -29,29 +29,6 @@
 
 MyTurn = false;
 
-// Set up port and IP
-var ip, port;
-ip = "127.0.0.1";
-port = 3112;
-
-// Create socket
-Socket = network_create_socket(network_socket_tcp);
-show_debug_message("player socket id: " + string(Socket));
-//Socket2 = network_create_socket(network_socket_tcp);
-if (Socket &lt; 0){
-    show_debug_message("Socket error");
-}
-// Connect, and save the status in isConnected
-isConnected = network_connect(Socket, ip, port);
-//isConnectedGlobal = network_connect(Socket2, ip, 6712); // global
-var toSend2 = buffer_create(100, buffer_fixed, 1);
-buffer_write(toSend2, buffer_u8, 11);
-network_send_packet(Socket, toSend2, buffer_tell(toSend2));
-// send ready packet id: 9
-
-var toSend = buffer_create(100, buffer_fixed, 1);
-buffer_write(toSend, buffer_u8, 9);
-network_send_packet(Socket, toSend, buffer_tell(toSend));
 </string>
           </argument>
         </arguments>
@@ -106,77 +83,63 @@ if (type_event == network_type_data){
     switch (msgid){
     case "GEN":
         show_debug_message("General Action Initiated");
-        
-        // Interpret the message
-        var message = buffer_read(buffer, buffer_string);
-        var username = buffer_read(buffer, buffer_string);
-        
-        // Add to Chat list.
-        ds_list_insert(Chat, 0, username + ": " + message);
+        var initPlayer = buffer_read(buffer, buffer_u8);
+        var subAction = buffer_read(buffer, buffer_string);
+        var targetPlayer = buffer_read(buffer, buffer_u8);
+
         break;
     
     case "INF":
         show_debug_message("Influence Action Initiated");
-        
+        var initPlayer = buffer_read(buffer, buffer_u8);
+        var subAction = buffer_read(buffer, buffer_string);
+        var targetPlayer = buffer_read(buffer, buffer_u8);
         // Read the runes.
-        ds_list_destroy(runeShow);
-        runeShow = ds_list_create();
-        curCount = 0;
-        show_debug_message("loading runes... player count is: " + string( Caravan_obj.playerCount));
+        switch (subAction){
         
-        while (curCount &lt; Caravan_obj.playerCount)
-        {   
-            ds_list_add(runeShow, buffer_read(buffer, buffer_u8));
-            show_debug_message("rune " + string(curCount) + " is: " + string(ds_list_find_value(runeShow, curCount)));
-            curCount += 1;
-        }
-        
-        // Script to update the caravan
-        show_debug_message("starting animation");
-        scr_animation();
-        //init new turn after display occurs
-
-        
-        
+            case "AMB":
+                show_debug_message("Ambassador action selected");
+                //execute action
+            case "ASS":
+                show_debug_message("Assassin action selected");
+                //execute action
+            case "CAP":
+                show_debug_message("Captain action selected");
+                //execute action
+            case "CON":
+                show_debug_message("Contessa action selected");
+                //execute action
+            case "DUK":
+                show_debug_message("Duke action selected");
+                //execute action
         break;
         
     case "CAT":
         show_debug_message("Counter-attack Initiated");
-        
+        var initPlayer = buffer_read(buffer, buffer_u8);
+        var subAction = buffer_read(buffer, buffer_string);
+        var targetPlayer = buffer_read(buffer, buffer_u8);
         // Read the event ID
         var event = buffer_read(buffer, buffer_u8);
         
         // Script to do the Special Event
         scr_ClientSpecialEvent(event);
         break;
-    
+        
     case "ALL":
         // Read the buffer
         show_debug_message("Action Allowed");
-        
-        var readTurn = buffer_read(buffer, buffer_bool);
-        
-        // If it's false, set turn to false and deactivate runes
-        if (readTurn == false){
-            show_debug_message("Set turn to false");
-            MYTURN = false;
-        }
-        // Otherwise, it's my turn. Activate runes
-        else{
-            MYTURN = true;
-            SENTRUNE = false;
-            instance_create(990, 256, Timer_obj);
-        }
+        var initPlayer = buffer_read(buffer, buffer_u8);
+        var subAction = buffer_read(buffer, buffer_string);
+        var targetPlayer = buffer_read(buffer, buffer_u8);
         break;
         
     case "CHA":
         show_debug_message("Challenge Started");
+        var initPlayer = buffer_read(buffer, buffer_u8);
+        var subAction = buffer_read(buffer, buffer_string);
+        var targetPlayer = buffer_read(buffer, buffer_u8);
         
-        // Read the Phase Text.
-        var phaseID = buffer_read(buffer, buffer_u8); 
-        
-        // Script to draw the phase
-        scr_ShowPhase(phaseID);
         break;
         
 

@@ -25,7 +25,19 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// --- Code to create deck ------------------------
+            <string>//Attributes
+
+Attacker =  0;
+Defender = 0;
+// if challenge is initiated this records to player who did the challenge
+// ----The challenge 
+Challenger = 0;
+
+CounterAttacker = 0;
+CounterDefender = 0;
+
+
+// --- Code to create deck ------------------------
 Deck = ds_list_create();
 
 // Here we add all the cards: Ambassadors, Assassins, Captaisn, Contessas, and Dukes.
